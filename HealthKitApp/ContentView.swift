@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
+        // Main calorie tracker screen (StepCounter veiw)
         VStack {
             StepsCountView()
         }
