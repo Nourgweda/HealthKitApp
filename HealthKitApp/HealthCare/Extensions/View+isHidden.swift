@@ -9,9 +9,9 @@ import Foundation
 import SwiftUI
 
 extension View {
-    @ViewBuilder func isHidden(_ hidden: Bool, remove: Bool = false) -> some View {
-        if hidden {
-            if !remove {
+    @ViewBuilder func isHidden(_ shouldHide: Bool, removeFromView: Bool = false) -> some View {
+        if shouldHide {
+            if !removeFromView {
                 self.hidden()
             }
         } else {

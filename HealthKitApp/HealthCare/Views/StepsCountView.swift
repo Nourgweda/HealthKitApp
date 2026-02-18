@@ -9,7 +9,7 @@ import SwiftUI
 
 struct StepsCountView: View {
 
-    @StateObject internal var viewHandler = StepsCountHandler()
+    @StateObject internal var countHandler = StepsCountHandler()
 
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
@@ -17,13 +17,13 @@ struct StepsCountView: View {
                 .foregroundColor(.white)
                 .font(.largeTitle)
 
-            // if not authorized
+            // Show when user has already authorized
             Group {
                 Text("Please authorize step counter !")
                     .foregroundColor(.red)
 
                 Button {
-                    viewHandler.healthRequest()
+                    countHandler.requestHealthAccess()
                 } label: {
                     Text("Authorize")
                         .foregroundColor(.white)
@@ -32,20 +32,20 @@ struct StepsCountView: View {
                 .background(Color(.red))
                 .cornerRadius(10)
 
-            }.isHidden(viewHandler.isAuthorized, remove: true)
+            }.isHidden(countHandler.isAuthorized, removeFromView: true)
 
             
-            // if authorized
+            // Not authorized yet
             Group {
                 Text("Today's steps 👟")
                     .foregroundColor(.orange)
                     .font(.largeTitle)
 
-                Text("\(viewHandler.userStepCount)")
+                Text("\(countHandler.displayedCalorieCount)")
                     .foregroundColor(.orange)
                     .font(.largeTitle)
 
-            }.isHidden(!viewHandler.isAuthorized, remove: true)
+            }.isHidden(!countHandler.isAuthorized, removeFromView: true)
         }
     }
 }
